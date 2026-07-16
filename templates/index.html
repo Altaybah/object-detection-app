@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object Detection App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 { color: #333; }
+        .upload-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        input[type="submit"] {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        input[type="submit"]:hover { background-color: #1d4ed8; }
+        .error { color: #dc2626; font-weight: bold; }
+        .result img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Object Detection App</h1>
+    <p>Upload a JPG image and the model will detect coffee cups and water bottles.</p>
+
+    <div class="upload-box">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept=".jpg,.jpeg" required>
+            <br>
+            <input type="submit" value="Detect Objects">
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if result_image %}
+        <div class="result">
+            <h3>Detection Result:</h3>
+            <img src="/{{ result_image }}" alt="Detection result">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
