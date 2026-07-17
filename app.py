@@ -5,7 +5,15 @@ from PIL import Image
 
 app = Flask(__name__)
 
-model = YOLO("best.pt")
+# Model is loaded on the first request (lazy loading),
+# so the server starts fast on small hosting machines.
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        model = YOLO("best.pt")
+    return model
 
 RESULTS_FOLDER = os.path.join("static", "results")
 os.makedirs(RESULTS_FOLDER, exist_ok=True)
@@ -27,7 +35,7 @@ def home():
         img.thumbnail((640, 640))
         img.save(image_path)
 
-        results = model.predict(image_path, conf=0.3, imgsz=416, device="cpu", verbose=False)
+        results = get_model().predict(image_path, conf=0.3, imgsz=416, device="cpu", verbose=False)
 
         result_path = os.path.join(RESULTS_FOLDER, "result_" + file.filename)
         results[0].save(filename=result_path)
