@@ -14,9 +14,9 @@ How to run it locally with Docker
 
 - Install Docker Desktop
 - Clone this repository and enter the folder
-- Build: `docker build -t object-detection-app .`
-- Run: `docker run -p 5000:5000 object-detection-app`
-- Open `http://127.0.0.1:5000` in your browser
+- Build: docker build -t object-detection-app
+- Run: docker run -p 5000:5000 object-detection-app
+- Open http://127.0.0.1:5000 in your browser
 
 
 How to use the interface
