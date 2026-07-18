@@ -36,7 +36,7 @@ Known issues and limitations
 
 
 Preview
-![App screenshot](screenshot.png)
+![App screenshot](Screenshot.png)
 
 
 References used:
